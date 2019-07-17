@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [number, setNumber] = useState(0);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('ran');
+
+
+  }
+
+  console.log(number)
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Set Number:
+            <input type="text" name="name" value={number} onChange={e => setNumber(e.target.value) }  />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       </header>
     </div>
   );
