@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import Web3 from 'web3';
 import './App.css';
 
-const web3 = new Web3('https://9545-fdf183c2-eac9-47d3-8b15-9c3a1043eb38.ws-us0.gitpod.io', null);
+const web3 = new Web3(Web3.givenProvider, null);
 
 const abi = [
 	{
@@ -45,13 +45,19 @@ function App() {
 
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
-    //console.log(account);
+    console.log(account);
 
-    const contractAddress = '0x23B4E1c0dbD1E93B0d8e21c05fDb1FF1ADEDC3D1';
+    const contractAddress = '0x754ce7feB80cC249621f6f86bA9c82aE4B8073e5';
 
-    const storageContract = web3.eth.Contract(abi,contractAddress);
+    const storageContract = new web3.eth.Contract(abi,contractAddress);
 
-    console.log(storageContract);
+    //console.log(storageContract.methods);
+
+    const result = await storageContract.methods.set(parseInt(number)).send({from: account})
+
+    console.log(result);
+
+    //console.log(storageContract);
   }
 
   console.log(web3);
