@@ -6,34 +6,34 @@ import './App.css';
 const web3 = new Web3(Web3.givenProvider, null);
 
 const abi = [
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "x",
-				"type": "uint256"
-			}
-		],
-		"name": "set",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "get",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	}
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "x",
+        "type": "uint256"
+      }
+    ],
+    "name": "set",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "get",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
 ]
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
 
     //console.log(storageContract.methods);
 
-    const result = await storageContract.methods.set(parseInt(number)).send({from: account})
+    const result = await storageContract.methods.get().call({from: account});
 
     console.log(result);
 
