@@ -47,17 +47,13 @@ function App() {
     const account = accounts[0];
     console.log(account);
 
-    const contractAddress = '0x754ce7feB80cC249621f6f86bA9c82aE4B8073e5';
+    const contractAddress = '0x15EbA188789C8FB5c66D9aD6EDeC7983352e5520';
 
-    const storageContract = new web3.eth.Contract(abi,contractAddress);
+    const storageContract = new web3.eth.Contract(abi, account, { address: contractAddress });
 
-    //console.log(storageContract.methods);
+    console.log(storageContract.methods);
 
-    const result = await storageContract.methods.get().call({from: account});
-
-    console.log(result);
-
-    //console.log(storageContract);
+    const result = await storageContract.methods.set(number).send();
   }
 
   console.log(web3);
