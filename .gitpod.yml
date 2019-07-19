@@ -1,2 +1,2 @@
 tasks:
-  - init: npm i -g truffle
+- command: npm i -g truffle
