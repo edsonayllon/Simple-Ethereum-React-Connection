@@ -39,36 +39,45 @@ const abi = [
 function App() {
   const [number, setNumber] = useState(0);
 
-  const handleSubmit = async (e) => {
+  const handleSet = async (e) => {
     e.preventDefault();
-    console.log('ran');
-
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
     console.log(account);
-
     const contractAddress = '0x15EbA188789C8FB5c66D9aD6EDeC7983352e5520';
-
     const storageContract = new web3.eth.Contract(abi, account, { address: contractAddress });
-
-    console.log(storageContract.methods);
-
-    const result = await storageContract.methods.set(number).send();
+    const gas = await storageContract.methods.set(number).estimateGas();
+    const result = await storageContract.methods.set(number).send({from: account, gas}, (err, result) => {
+      console.log(err);
+      console.log(result);
+    });
+    console.log(result);
   }
 
-  console.log(web3);
-  console.log(number)
+  const handleGet = async (e) => {
+    e.preventDefault();
+    const accounts = await window.ethereum.enable();
+    const account = accounts[0];
+    const contractAddress = '0x15EbA188789C8FB5c66D9aD6EDeC7983352e5520';
+    const storageContract = new web3.eth.Contract(abi, account, { address: contractAddress });
+    //const gas = await storageContract.methods.set(number).estimateGas();
+    const result = await storageContract.methods.get().call({from: account}, (error, result) => {
+      console.log(error);
+      console.log(result);
+    });
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSet}>
           <label>
             Set Number:
             <input type="text" name="name" value={number} onChange={e => setNumber(e.target.value) }  />
           </label>
           <input type="submit" value="Submit" />
         </form>
+        <button onClick={handleGet} type="button">Get</button>
       </header>
     </div>
   );
