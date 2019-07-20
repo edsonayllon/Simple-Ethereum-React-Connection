@@ -44,7 +44,7 @@ function App() {
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
     console.log(account);
-    const contractAddress = '0x15EbA188789C8FB5c66D9aD6EDeC7983352e5520';
+    const contractAddress = '0xC1eDa389e8cE8dABa5f7E1c4A8085ceBB323d61C';
     const storageContract = new web3.eth.Contract(abi, account, { address: contractAddress });
     const gas = await storageContract.methods.set(number).estimateGas();
     const result = await storageContract.methods.set(number).send({from: account, gas}, (err, result) => {
@@ -58,9 +58,9 @@ function App() {
     e.preventDefault();
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
-    const contractAddress = '0x15EbA188789C8FB5c66D9aD6EDeC7983352e5520';
+    const contractAddress = '0xC1eDa389e8cE8dABa5f7E1c4A8085ceBB323d61C';
     const storageContract = new web3.eth.Contract(abi, account, { address: contractAddress });
-    //const gas = await storageContract.methods.set(number).estimateGas();
+    const gas = await storageContract.methods.set(number).estimateGas();
     const result = await storageContract.methods.get().call({from: account}, (error, result) => {
       console.log(error);
       console.log(result);
