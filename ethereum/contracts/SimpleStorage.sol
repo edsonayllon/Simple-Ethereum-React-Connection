@@ -1,4 +1,4 @@
-pragma solidity >=0.4.0 <0.7.0;
+pragma solidity >=0.5.0 <0.7.0;
 
 contract SimpleStorage {
     uint storedData;
@@ -9,5 +9,9 @@ contract SimpleStorage {
 
     function get() public view returns (uint) {
         return storedData;
+    }
+
+    function hello() public pure returns (string memory) {
+        return "Hello World!";
     }
 }
