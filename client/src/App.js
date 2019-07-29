@@ -52,48 +52,29 @@ const abi = [
 
 function App() {
   const [number, setNumber] = useState(0);
-  const [Contract, setContract] = useState(new web3.eth.Contract(abi));
+  const [getNumber, setGetNumber] = useState('0x00');
 
   const handleSet = async (e) => {
     e.preventDefault();
+    const contractAddr = '0xDB20352830a438c0802dd14F987a55Ea8899A690';
+    const SimpleContract = new web3.eth.Contract(abi, contractAddr);
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
-    Contract.options.address = account;
-    const gas = await Contract.methods.set(number).estimateGas();
-    const gasprice =web3.eth.defaultGasPrice
-    const result = await Contract.methods.set(number).send({from: account, gas: gasprice}, (err, result) => {
+    const gas = await SimpleContract.methods.set(number).estimateGas();
+    const result = await SimpleContract.methods.set(number).send({ from: account, gas }, (err, result) => {
       console.log(err);
       console.log(result);
     });
-    console.log(result);
   }
 
   const handleGet = async (e) => {
     e.preventDefault();
-    const accounts = await window.ethereum.enable();
-    const account = accounts[0];
-    Contract.options.address = account;
-    const gas = await Contract.methods.set(number).estimateGas();
-    const result = await Contract.methods.get().call({from: account}, (error, result) => {
-      console.log(error);
-      console.log(result);
-    });
-  }
-
-  const handleHello = async (e) => {
-    e.preventDefault();
-    const accounts = await window.ethereum.enable();
-    const account = accounts[0];
-    Contract.options.address = account;
-    const gas = await Contract.methods.hello().estimateGas();
-    const result = await Contract.methods.hello;
+    const contractAddr = '0xDB20352830a438c0802dd14F987a55Ea8899A690';
+    const SimpleContract = new web3.eth.Contract(abi, contractAddr);
+    const result = await SimpleContract.methods.get.call();
+    setGetNumber(result._hex);
     console.log(result);
   }
-
-  useEffect(() => {
-    Contract.address = '0xAd4FA117A42a7BCaee8E6617157d181e3a6f6Da4';
-    console.log(Contract);
-  }, [])
 
   return (
     <div className="App">
@@ -103,9 +84,10 @@ function App() {
             Set Number:
             <input type="text" name="name" value={number} onChange={e => setNumber(e.target.value) }  />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Set Number" />
         </form>
-        <button onClick={handleHello} type="button">Get Hello</button>
+        <button onClick={handleGet} type="button">Get Number</button>
+        { web3.utils.hexToNumber(getNumber) }
       </header>
     </div>
   );
