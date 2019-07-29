@@ -86,6 +86,7 @@ function App() {
           </label>
           <input type="submit" value="Set Number" />
         </form>
+        <br/>
         <button onClick={handleGet} type="button">Get Number</button>
         { web3.utils.hexToNumber(getNumber) }
       </header>
