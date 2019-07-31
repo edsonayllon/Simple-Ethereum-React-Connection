@@ -1,10 +1,8 @@
 # Simple Ethereum React Connenction
 
-## Contents
-
 ## 1 | Description
 
-A React app with an Etherum Smart Contract as an API/backend.
+A React frontend with an Etherum Smart Contract backend.
 
 ![Screenshot](./Screenshot.jpg)
 
