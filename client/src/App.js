@@ -1,54 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import Web3 from 'web3';
+import { simpleStorageAbi } from './abi/abis'
 import './App.css';
 
 const web3 = new Web3(Web3.givenProvider);
-
-const abi = [
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "x",
-        "type": "uint256"
-      }
-    ],
-    "name": "set",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "hello",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "pure",
-    "type": "function"
-  }
-]
+const contractAddr = '0x97EaC1d4C5eA22dE6ba7292FA5d01a591Aac83A7';
+const SimpleContract = new web3.eth.Contract(simpleStorageAbi, contractAddr);
 
 function App() {
   const [number, setNumber] = useState(0);
@@ -56,8 +13,6 @@ function App() {
 
   const handleSet = async (e) => {
     e.preventDefault();
-    const contractAddr = '0xDB20352830a438c0802dd14F987a55Ea8899A690';
-    const SimpleContract = new web3.eth.Contract(abi, contractAddr);
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
     const gas = await SimpleContract.methods.set(number).estimateGas();
@@ -69,8 +24,6 @@ function App() {
 
   const handleGet = async (e) => {
     e.preventDefault();
-    const contractAddr = '0xDB20352830a438c0802dd14F987a55Ea8899A690';
-    const SimpleContract = new web3.eth.Contract(abi, contractAddr);
     const result = await SimpleContract.methods.get.call();
     setGetNumber(result._hex);
     console.log(result);
