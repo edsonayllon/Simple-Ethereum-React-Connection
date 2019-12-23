@@ -2,10 +2,11 @@ export const simpleStorageAbi = [
     {
         "constant": false,
         "inputs": [
-        {
-            "name": "x",
-            "type": "uint256"
-        }
+            {
+                "internalType": "uint256",
+                "name": "x",
+                "type": "uint256"
+            }
         ],
         "name": "set",
         "outputs": [],
@@ -18,10 +19,11 @@ export const simpleStorageAbi = [
         "inputs": [],
         "name": "get",
         "outputs": [
-        {
-            "name": "",
-            "type": "uint256"
-        }
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
         ],
         "payable": false,
         "stateMutability": "view",
@@ -32,10 +34,11 @@ export const simpleStorageAbi = [
         "inputs": [],
         "name": "hello",
         "outputs": [
-        {
-            "name": "",
-            "type": "string"
-        }
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
         ],
         "payable": false,
         "stateMutability": "pure",
