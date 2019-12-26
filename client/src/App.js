@@ -23,7 +23,6 @@ function App() {
 
   const handleGet = async (e) => {
     e.preventDefault();
-    await window.ethereum.enable();
     const result = await SimpleContract.methods.get().call();
     setGetNumber(result);
     console.log(result);
