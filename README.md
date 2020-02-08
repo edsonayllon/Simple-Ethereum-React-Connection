@@ -1,12 +1,28 @@
+---
+author: Edson Ayllon
+category: functionality
+tags:
+- ethereum
+- react
+- solidity
+status: complete
+twitter: https://twitter.com/relativeread
+---
+
+## Modular 23-2019
+
+
 # Simple Ethereum React Connenction
 
-## 1 | Description
 
 A React frontend with an Etherum Smart Contract backend.
 
+## 1. Preview
+
+
 ![Screenshot](./Screenshot.jpg)
 
-## 2 | Getting Started
+## 2. Getting Started
 
 ### 2.1 Install
 
